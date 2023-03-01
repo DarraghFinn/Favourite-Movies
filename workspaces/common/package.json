@@ -1,0 +1,13 @@
+{
+  "name": "@scribbr-assessment-full-stack/common",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": "18.14.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "main": "./src/index.ts"
+}

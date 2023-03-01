@@ -1,0 +1,26 @@
+{
+  "name": "@scribbr-assessment-full-stack/server",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": "18.14.1"
+  },
+  "scripts": {
+    "build": "ts-node ./scripts/build.ts",
+    "dev": "yarn concurrently 'yarn:dev:*'",
+    "dev:build": "ts-node ./scripts/build.ts dev",
+    "dev:start": "nodemon --watch dist --exec ts-node ./dist/index.js -q",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@scribbr-assessment-full-stack/common": "*",
+    "cors": "2.8.5",
+    "express": "4.18.2"
+  },
+  "devDependencies": {
+    "@types/cors": "2.8.13",
+    "@types/express": "4.17.17",
+    "nodemon": "2.0.22"
+  }
+}

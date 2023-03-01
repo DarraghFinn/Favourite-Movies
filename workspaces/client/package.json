@@ -1,0 +1,24 @@
+{
+  "name": "@scribbr-assessment-full-stack/client",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": "18.14.1"
+  },
+  "scripts": {
+    "build": "ts-node ./scripts/build.ts",
+    "dev": "ts-node ./scripts/build.ts dev",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@scribbr-assessment-full-stack/common": "*",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.28",
+    "@types/react-dom": "18.0.11",
+    "esbuild-plugin-postcss2": "0.1.2"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "CommonJS",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "paths": {
+      "@scribbr-assessment-full-stack/*": ["workspaces/*"]
+    },
+    "jsx": "react",
+    "experimentalDecorators": true,
+    "resolveJsonModule": true,
+    "noEmit": true
+  },
+  "exclude": ["node_modules", "**/node_modules/*", "dist"]
+}
