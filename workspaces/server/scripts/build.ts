@@ -18,8 +18,15 @@ export async function createContext(options: BuildOptions) {
     outfile: "./dist/index.js",
     define: {
       "process.env.NODE_ENV": `"${env}"`,
+      "process.env.API_KEY": '"8fc6c84a"',
+      "process.env.OMDB_API_URL": '"http://www.omdbapi.com"',
+      "process.env.POSTGRES_DB_NAME": '"movies"',
+      "process.env.POSTGRES_HOST": '"localhost"',
+      "process.env.POSTGRES_USER": '"test"',
+      "process.env.POSTGRES_PORT": '"5432"',
+      "process.env.POSTGRES_PASSWORD": '"test"',
     },
-    external: ["express"], // Some libraries have to be marked as external
+    external: ["express", 'pg-native'], // Some libraries have to be marked as external
     platform: "node", // When building for node we need to setup the environment for it
     target: `node${nodeVersion}`,
     bundle: true,

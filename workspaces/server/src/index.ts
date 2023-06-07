@@ -2,8 +2,17 @@ import { APP_TITLE } from "@scribbr-assessment-full-stack/common";
 import cors from "cors";
 import express from "express";
 import { join } from "path";
+import { Pool } from 'pg'
 
 const PORT = 3000;
+
+const pool = new Pool({
+    user: process.env.POSTGRES_USER,
+    host: process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DB_NAME,
+    password: process.env.POSTGRES_PASSWORD,
+    port: Number(process.env.POSTGRES_PORT)
+})
 
 const app = express();
 app.use(cors());
