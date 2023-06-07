@@ -1,4 +1,225 @@
+:root {
+  --mainColor: #ffffff;
+  --headerColor: #05103e;
+  --borderColor: #d4d8e8;
+  --inputColor: #5e678e;
+  --buttonColor: #fc5216;
+}
+
 body {
-  font-family: sans-serif;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 72px;
+  gap: 24px;
+  position: relative;
+  width: calc(100% - 160px);
+  height: 456px;
+  background: var(--mainColor);
+  overflow: auto;
+}
+
+h1 {
+  width: 456px;
+  height: 29px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 29px;
+  color: var(--headerColor);
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.searchBarWrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+  width: 456px;
+  height: 43px;
+  border: 1px solid var(--borderColor);
+  border-radius: 8px;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+  align-items: center;
+}
+
+#searchBarInput {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+  border: none;
+  outline: none;
+}
+
+.searchResultsList {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px;
+  gap: 4px;
+  isolation: isolate;
+  width: 456px;
+  max-height: 100%;
+  flex: none;
+  order: 2;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.movie {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+  gap: 20px;
+  width: 440px;
+  height: 72px;
+  border-radius: 8px;
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  z-index: 0;
+  cursor: pointer;
+}
+
+#moviePoster {
+  width: 32px;
+  height: 48px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.movieInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 4px;
+  width: 240px;
+  height: 40px;
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+}
+
+#movieTitle {
+  height: 19px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--headerColor);
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 440px;
+}
+
+#movieYear {
+  width: 240px;
+  height: 17px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: var(--inputColor);
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.voteButton {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
+  width: 104px;
+  height: 35px;
+  background: var(--headerColor);
+  border-radius: 8px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  justify-content: center;
+}
+
+#votes {
+  width: 80px;
+  height: 19px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--mainColor);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.movie:hover .voteButton {
+  display: flex;
+}
+
+.upvoteButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
+  width: 66px;
+  height: 35px;
+  background: var(--buttonColor);
+  border-radius: 8px;
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  justify-content: center;
+  user-select: none;
+}
+
+#upvotes {
+  height: 19px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--mainColor);
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+#upvoteIcon {
+  width: 13px;
+  height: 15px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  color: var(--mainColor);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 }
