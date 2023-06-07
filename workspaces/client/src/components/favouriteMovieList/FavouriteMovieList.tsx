@@ -4,7 +4,7 @@ import { MovieItem } from "../movieItem/MovieItem";
 
 export const FavouriteMovieList = ({ favouriteMovies, handleClick }) => {
   return (
-    <div>
+    <div data-testid="scribbr-movie-list">
       {Object.values(favouriteMovies)
         .sort((a: Movie, b: Movie) => b.upvotes - a.upvotes)
         .map((movie: Movie) => (

@@ -32,7 +32,7 @@ export function App() {
   );
 
   return (
-    <>
+    <div data-testid="scribbr-movies">
       <Header />
       <SearchBar setSearchedResults={setSearchedResults} />
       <SearchResultsList
@@ -40,10 +40,11 @@ export function App() {
         handleClick={handleClick}
       />
       <FavouriteMovieList
+        data-testid="scribbr-favourite-movies"
         key={favouriteListKey}
         favouriteMovies={favouriteMovies}
         handleClick={handleClick}
       />
-    </>
+    </div>
   );
 }

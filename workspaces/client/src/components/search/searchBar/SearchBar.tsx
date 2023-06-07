@@ -38,7 +38,7 @@ export const SearchBar = ({ setSearchedResults }) => {
   };
 
   return (
-    <div className="searchBarWrapper">
+    <div className="searchBarWrapper" data-testid="scribbr-search-bar">
       <img src={searchIcon} alt="searchBarIcon" />
       <input
         autoFocus

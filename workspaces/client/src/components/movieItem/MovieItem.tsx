@@ -10,7 +10,11 @@ export const MovieItem = (props: {
   const { Poster, Title, Year } = props.movie;
 
   return (
-    <div className="movie" onClick={() => props.handleClick(props.movie)}>
+    <div
+      className="movie"
+      data-testid="scribbr-movie-item"
+      onClick={() => props.handleClick(props.movie)}
+    >
       <img id="moviePoster" src={Poster} alt="moviePoster" />
       <div className="movieInfo">
         <div id="movieTitle">{Title}</div>
