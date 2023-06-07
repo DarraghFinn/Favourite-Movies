@@ -18,6 +18,9 @@ export async function createContext(options: BuildOptions) {
     bundle: true,
     minify: env === "production",
     sourcemap: env === "development",
+    loader: {
+      ".png": "file",
+    },
   });
 }
 
