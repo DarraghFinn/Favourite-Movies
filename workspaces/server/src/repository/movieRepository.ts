@@ -1,32 +1,38 @@
 import { Movie } from "@scribbr-assessment-full-stack/common/src";
-import { Pool } from "pg";
+import { Client } from "pg";
+import client from "../config/dbSetup";
 
-export const fetchMovies = async (pool: Pool) => {
-  try {
-    const result = await pool.query("SELECT * FROM movies");
-    return result.rows;
-  } catch (error) {
-    console.error("Failed to fetch movies from DB");
-    throw error;
-  }
-};
+export class MovieRepository {
+  private db: Client;
 
-export const addNewMovie = async (pool: Pool, movie: Movie) => {
-  try {
-    const result = await pool.query("SELECT * FROM movies");
-    return result.rows;
-  } catch (error) {
-    console.error("Failed to add movie to DB");
-    throw error;
+  constructor() {
+    this.db = client;
   }
-};
 
-export const updateMovie = async (pool: Pool, id: string) => {
-  try {
-    const result = await pool.query("SELECT * FROM movies");
-    return result.rows;
-  } catch (error) {
-    console.error("Failed to update movie in DB");
-    throw error;
+  async fetchMovies() {
+    try {
+      const result = await this.db.query("SELECT * FROM movies");
+      return result.rows;
+    } catch (error) {
+      throw error;
+    }
   }
-};
+
+  async addNewMovie(movie: Movie) {
+    try {
+      const result = await this.db.query("SELECT * FROM movies");
+      return result.rows;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async updateMovie(id: string) {
+    try {
+      const result = await this.db.query("SELECT * FROM movies");
+      return result.rows;
+    } catch (error) {
+      throw error;
+    }
+  }
+}

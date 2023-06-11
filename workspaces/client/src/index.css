@@ -1,26 +1,26 @@
 :root {
   --mainColor: #ffffff;
   --headerColor: #05103e;
-  --borderColor: #d4d8e8;
-  --inputColor: #5e678e;
-  --buttonColor: #fc5216;
+  --mainWidth: 456px; /* Width of main scribbr components */
 }
 
 body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 72px;
+  padding-top: 72px;
   gap: 24px;
   position: relative;
-  width: calc(100% - 160px);
-  height: 456px;
   background: var(--mainColor);
-  overflow: auto;
+}
+
+#root {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 h1 {
-  width: 456px;
+  width: var(--mainWidth);
   height: 29px;
   font-family: "Inter";
   font-style: normal;
@@ -41,9 +41,9 @@ h1 {
   align-items: center;
   padding: 12px;
   gap: 12px;
-  width: 456px;
+  width: var(--mainWidth);
   height: 43px;
-  border: 1px solid var(--borderColor);
+  border: 1px solid #d4d8e8;
   border-radius: 8px;
   flex: none;
   order: 1;
@@ -60,16 +60,18 @@ h1 {
   flex-grow: 1;
   border: none;
   outline: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .searchResultsList {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 8px;
   gap: 4px;
   isolation: isolate;
-  width: 456px;
+  width: var(--mainWidth);
   max-height: 100%;
   flex: none;
   order: 2;
@@ -83,7 +85,7 @@ h1 {
   align-items: center;
   padding: 12px;
   gap: 20px;
-  width: 440px;
+  width: calc(var(--mainWidth) - 25px);
   height: 72px;
   border-radius: 8px;
   flex: none;
@@ -130,7 +132,7 @@ h1 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 440px;
+  max-width: calc(var(--mainWidth) - 25px);
 }
 
 #movieYear {
@@ -141,7 +143,7 @@ h1 {
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
-  color: var(--inputColor);
+  color: #5e678e;
   flex: none;
   order: 1;
   align-self: stretch;
@@ -175,6 +177,12 @@ h1 {
   flex: none;
   order: 0;
   flex-grow: 0;
+  outline-style: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 }
 
 .movie:hover .voteButton {
@@ -188,13 +196,12 @@ h1 {
   gap: 11px;
   width: 66px;
   height: 35px;
-  background: var(--buttonColor);
+  background: #fc5216;
   border-radius: 8px;
   flex: none;
   order: 2;
   flex-grow: 0;
   justify-content: center;
-  user-select: none;
 }
 
 #upvotes {
@@ -208,6 +215,11 @@ h1 {
   flex: none;
   order: 1;
   flex-grow: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 }
 
 #upvoteIcon {
@@ -222,4 +234,9 @@ h1 {
   flex: none;
   order: 0;
   flex-grow: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
 }

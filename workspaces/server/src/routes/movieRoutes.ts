@@ -1,13 +1,12 @@
 import express, { Request, Response } from "express";
-import { Pool } from "pg";
 import MovieController from "../controllers/movieController";
 
 const router = express.Router();
 
-export default function movieRoutes(pool: Pool) {
-  const controller = new MovieController(pool);
+export default function movieRoutes() {
+  const controller = new MovieController();
 
-  router.get("/movies/:title", async (req: Request, res: Response) => {
+  router.get("/movies/movie/:title", async (req: Request, res: Response) => {
     await controller.getMoviesByTitleAPI(req, res);
   });
 

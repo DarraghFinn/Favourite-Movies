@@ -16,7 +16,7 @@ export const SearchBar = ({ setSearchedResults }) => {
   const fetchMovies = async (title: string) => {
     try {
       if (title.length > 0) {
-        const response = await fetch(`/api/movies/${title}`);
+        const response = await fetch(`/api/movies/movie/${title}`);
         const data = await response.json();
         setSearchedResults(data);
       } else {

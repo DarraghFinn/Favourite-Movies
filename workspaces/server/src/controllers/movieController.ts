@@ -1,19 +1,20 @@
 import { Request, Response } from "express";
-import {
-  addMovie,
-  getMovies,
-  getMoviesByTitle,
-  updateMovie,
-} from "../services/movieService";
-import { Pool } from "pg";
+import { MovieService } from "../services/movieService";
+import { OMDbService } from "../services/omdbService";
 
 export default class MovieController {
-  constructor(private readonly pool: Pool) {}
+  private movieService: MovieService;
+  private omdbService: OMDbService;
+
+  constructor() {
+    this.movieService = new MovieService();
+    this.omdbService = new OMDbService();
+  }
 
   async getMoviesByTitleAPI(req: Request, res: Response) {
     try {
       const { title } = req.params;
-      const movies = await getMoviesByTitle(title);
+      const movies = await this.omdbService.getMoviesByTitle(title);
 
       if (movies.Response === "True") {
         res.status(200).json(movies);
@@ -29,7 +30,7 @@ export default class MovieController {
 
   async getFavouriteMovies(res: Response) {
     try {
-      const favouriteMovies = await getMovies(this.pool);
+      const favouriteMovies = await this.movieService.getMovies();
       res.status(200).json(favouriteMovies);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -39,7 +40,7 @@ export default class MovieController {
   async addFavouriteMovie(req: Request, res: Response) {
     try {
       const request = req.body;
-      await addMovie(this.pool, request);
+      await this.movieService.addMovie(request);
       res.status(201);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -49,7 +50,7 @@ export default class MovieController {
   async updateFavouriteMovie(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      await updateMovie(this.pool, id);
+      await this.movieService.updateMovie(id);
       res.status(204);
     } catch (error) {
       res.status(500).json({ error: error.message });
