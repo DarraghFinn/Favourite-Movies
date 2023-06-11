@@ -47,10 +47,10 @@ export default class MovieController {
     }
   }
 
-  async updateFavouriteMovie(req: Request, res: Response) {
+  async upvoteFavouriteMovie(req: Request, res: Response) {
     try {
-      const { id } = req.params;
-      await this.movieService.updateMovie(id);
+      const { id, upvotes } = req.body;
+      await this.movieService.upvoteMovie(id, upvotes);
       res.status(204);
     } catch (error) {
       res.status(500).json({ error: error.message });

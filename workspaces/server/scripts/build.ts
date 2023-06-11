@@ -26,7 +26,7 @@ export async function createContext(options: BuildOptions) {
       "process.env.POSTGRES_PORT": '"5432"',
       "process.env.POSTGRES_PASSWORD": '"test"',
     },
-    external: ["express", 'pg-native'], // Some libraries have to be marked as external
+    external: ["express", "pg-native"], // Some libraries have to be marked as external
     platform: "node", // When building for node we need to setup the environment for it
     target: `node${nodeVersion}`,
     bundle: true,

@@ -1,11 +1,14 @@
 import { Movie } from "@scribbr-assessment-full-stack/common/src";
+import Database from "../config/db";
 import { MovieRepository } from "../repository/movieRepository";
 
 export class MovieService {
   private movieRepository: MovieRepository;
+  private db: Database;
 
   constructor() {
-    this.movieRepository = new MovieRepository();
+    this.db = new Database();
+    this.movieRepository = new MovieRepository(this.db);
   }
 
   async getMovies() {
@@ -19,17 +22,15 @@ export class MovieService {
 
   async addMovie(movie: Movie) {
     try {
-      const rows = await this.movieRepository.addNewMovie(movie);
-      return rows;
+      await this.movieRepository.addNewMovie(movie);
     } catch (error) {
       throw error;
     }
   }
 
-  async updateMovie(id: string) {
+  async upvoteMovie(id: string, upvotes: string) {
     try {
-      const rows = await this.movieRepository.updateMovie(id);
-      return rows;
+      await this.movieRepository.upvoteMovie(id, Number(upvotes));
     } catch (error) {
       throw error;
     }

@@ -21,7 +21,7 @@ export default function movieRoutes() {
   router.patch(
     "/movies/favourites/:id",
     async (req: Request, res: Response) => {
-      await controller.updateFavouriteMovie(req, res);
+      await controller.upvoteFavouriteMovie(req, res);
     }
   );
 
