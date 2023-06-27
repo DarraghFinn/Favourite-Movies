@@ -6,7 +6,6 @@ describe("<MovieItem /> tests", () => {
   it("should render movie item component", async () => {
     render(
       <MovieItem
-        handleClick={() => {}}
         movie={{
           Poster: "Test poster",
           Title: "This Test",
@@ -15,6 +14,7 @@ describe("<MovieItem /> tests", () => {
           imdbID: "123-abc",
         }}
         count={null}
+        tabIndex={undefined}
       />
     );
 

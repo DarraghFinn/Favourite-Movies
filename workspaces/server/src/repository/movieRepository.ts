@@ -1,5 +1,9 @@
-import { Movie } from "@scribbr-assessment-full-stack/common/src";
+import {
+  OMDbMovie,
+  PersistedMovie,
+} from "@scribbr-assessment-full-stack/common/src";
 import Database from "../config/db";
+import { queries } from "./movieQueries";
 
 export class MovieRepository {
   private db: Database;
@@ -10,17 +14,23 @@ export class MovieRepository {
 
   async fetchMovies() {
     try {
-      const result = await this.db.query("SELECT * FROM movies");
-      return result.rows;
+      const result = await this.db.query(queries.fetchAllMovies);
+      return result.rows as PersistedMovie[];
     } catch (error) {
       throw error;
     }
   }
 
-  async addNewMovie(movie: Movie) {
+  async addNewMovie(movie: OMDbMovie) {
     try {
-      const query = "INSERT INTO movies (id) VALUES ($1) RETURNING *";
-      await this.db.query(query, [movie.imdbID]);
+      await this.db.query(queries.addNewMovie, [
+        movie.imdbID,
+        movie.Title,
+        movie.Year,
+        movie.Type,
+        movie.Poster,
+        movie.upvotes,
+      ]);
     } catch (error) {
       throw error;
     }
@@ -28,8 +38,7 @@ export class MovieRepository {
 
   async upvoteMovie(id: string, upvotes: number) {
     try {
-      const query = "UPDATE movies SET upvotes = $1 WHERE id = $2 RETURNING *";
-      await this.db.query(query, [id, upvotes]);
+      await this.db.query(queries.upvoteMovie, [upvotes, id]);
     } catch (error) {
       throw error;
     }

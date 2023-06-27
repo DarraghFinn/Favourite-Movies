@@ -1,26 +1,22 @@
-import { Movie } from "@scribbr-assessment-full-stack/common/src";
 import React from "react";
 import { VoteButton } from "../button/VoteButton";
+import { MovieItemProps } from "@scribbr-assessment-full-stack/common/src";
 
-export const MovieItem = (props: {
-  movie: Movie;
-  count: number;
-  handleClick: (movie: Movie) => void;
-}) => {
-  const { Poster, Title, Year } = props.movie;
-
+export const MovieItem = (props: MovieItemProps) => {
+  const { movie, count, handleClick, tabIndex } = props;
   return (
     <div
       className="movie"
       data-testid="scribbr-movie-item"
-      onClick={() => props.handleClick(props.movie)}
+      onClick={() => handleClick(movie)}
+      tabIndex={tabIndex}
     >
-      <img id="moviePoster" src={Poster} alt="moviePoster" />
+      <img id="moviePoster" src={movie.Poster} alt="moviePoster" />
       <div className="movieInfo">
-        <div id="movieTitle">{Title}</div>
-        <div id="movieYear">{Year}</div>
+        <div id="movieTitle">{movie.Title}</div>
+        <div id="movieYear">{movie.Year}</div>
       </div>
-      <VoteButton count={props.count} />
+      <VoteButton count={count} />
     </div>
   );
 };

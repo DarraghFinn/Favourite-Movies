@@ -10,7 +10,7 @@ export const VoteButton = (props: { count: number | null }) => {
     : "scribbr-vote-button";
 
   return (
-    <div className={className} data-testid={testId}>
+    <div className={className} data-testid={testId} role="button">
       {isUpvoteButton ? (
         <>
           <div id="upvoteIcon">❤️</div>

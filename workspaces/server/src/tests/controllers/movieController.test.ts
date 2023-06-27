@@ -4,12 +4,19 @@ import movieRoutes from "../../routes/movieRoutes";
 
 describe("MovieController tests", () => {
   const app = express();
+  app.use(express.json());
   app.use("/api", movieRoutes());
+
   let appServer = app.listen(3001);
 
   beforeAll(() => {
     process.env.API_KEY = "8fc6c84a";
     process.env.OMDB_API_URL = "http://www.omdbapi.com";
+    process.env.POSTGRES_DB_NAME = "postgres";
+    process.env.POSTGRES_HOST = "localhost";
+    process.env.POSTGRES_USER = "postgres";
+    process.env.POSTGRES_PORT = "5432";
+    process.env.POSTGRES_PASSWORD = "test";
   });
 
   afterAll(() => {

@@ -1,8 +1,11 @@
 import { fetchMovieBySearch } from "@scribbr-assessment-full-stack/client/src/api/movieApi";
-import { SEARCH_PLACEHOLDER } from "@scribbr-assessment-full-stack/common";
+import {
+  SEARCH_PLACEHOLDER,
+  SearchBarProps,
+} from "@scribbr-assessment-full-stack/common";
 import React, { useEffect, useState } from "react";
 
-export const SearchBar = ({ setSearchedResults }) => {
+export const SearchBar = ({ setSearchedResults }: SearchBarProps) => {
   const [searchInput, setSearchInput] = useState("");
   const searchIcon = require("../../../../images/Icon.png");
 
@@ -15,11 +18,13 @@ export const SearchBar = ({ setSearchedResults }) => {
   }, [searchInput]);
 
   const fetchMovies = async (title: string) => {
-    if (title.length > 0) {
-      const data = await fetchMovieBySearch(title);
-      setSearchedResults(data);
-    } else {
-      setSearchedResults(null);
+    try {
+      if (title.length > 0) {
+        const data = await fetchMovieBySearch(title);
+        setSearchedResults(data);
+      }
+    } catch (error) {
+      throw error;
     }
   };
 
@@ -41,6 +46,7 @@ export const SearchBar = ({ setSearchedResults }) => {
         id="searchBarInput"
         onChange={handleChange}
         placeholder={SEARCH_PLACEHOLDER}
+        tabIndex={1}
       />
     </div>
   );

@@ -1,4 +1,8 @@
-import { Movie } from "@scribbr-assessment-full-stack/common/src";
+import {
+  FavouriteMovies,
+  OMDbMovie,
+  PersistedMovie,
+} from "@scribbr-assessment-full-stack/common/src";
 import Database from "../config/db";
 import { MovieRepository } from "../repository/movieRepository";
 
@@ -14,13 +18,27 @@ export class MovieService {
   async getMovies() {
     try {
       const rows = await this.movieRepository.fetchMovies();
-      return rows;
+      const sortedByUpvotes = rows.sort(
+        (a: PersistedMovie, b: PersistedMovie) => b.upvotes - a.upvotes
+      );
+      return sortedByUpvotes.reduce((obj, movie) => {
+        const item = {
+          Poster: movie.poster,
+          Title: movie.title,
+          Type: movie.type,
+          Year: movie.year,
+          imdbID: movie.id,
+          upvotes: movie.upvotes,
+        };
+        obj[movie.id] = item;
+        return obj as FavouriteMovies;
+      }, {} as { [key: string]: OMDbMovie });
     } catch (error) {
       throw error;
     }
   }
 
-  async addMovie(movie: Movie) {
+  async addMovie(movie: OMDbMovie) {
     try {
       await this.movieRepository.addNewMovie(movie);
     } catch (error) {

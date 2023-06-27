@@ -39,9 +39,8 @@ export default class MovieController {
 
   async addFavouriteMovie(req: Request, res: Response) {
     try {
-      const request = req.body;
-      await this.movieService.addMovie(request);
-      res.status(201);
+      await this.movieService.addMovie(req.body);
+      res.status(201).json({});
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -51,7 +50,7 @@ export default class MovieController {
     try {
       const { id, upvotes } = req.body;
       await this.movieService.upvoteMovie(id, upvotes);
-      res.status(204);
+      res.sendStatus(204);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

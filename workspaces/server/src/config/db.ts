@@ -1,4 +1,5 @@
 import { Pool, PoolClient, QueryResult } from "pg";
+import { queries } from "../repository/movieQueries";
 
 export default class Database {
   private pool: Pool;
@@ -13,12 +14,24 @@ export default class Database {
     });
   }
 
-  async query<T>(queryText: string, values?: any[]): Promise<QueryResult<T>> {
-    const client: PoolClient = await this.pool.connect();
-    console.log({ client });
-
+  async createTable() {
     try {
+      const client: PoolClient = await this.pool.connect();
+      await client.query(queries.createMovieTable);
+      client.release();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async query<T>(queryText: string, values?: any[]): Promise<QueryResult<T>> {
+    let client: PoolClient;
+    try {
+      client = await this.pool.connect();
       return await client.query<T>(queryText, values);
+    } catch (error) {
+      console.error(error);
+      throw error;
     } finally {
       client.release();
     }

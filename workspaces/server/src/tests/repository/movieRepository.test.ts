@@ -1,7 +1,8 @@
-import { Movie } from "@scribbr-assessment-full-stack/common/src";
+import { OMDbMovie } from "@scribbr-assessment-full-stack/common/src";
 import { QueryResult } from "pg";
 import Database from "../../config/db";
 import { MovieRepository } from "../../repository/movieRepository";
+import { queries } from "../../repository/movieQueries";
 
 describe("MovieRepository tests", () => {
   let db: Database;
@@ -52,7 +53,7 @@ describe("MovieRepository tests", () => {
           upvotes: 3,
         },
       ];
-      const mockResult: QueryResult<Movie> = {
+      const mockResult: QueryResult<OMDbMovie> = {
         rows: expectedResult,
         rowCount: expectedResult.length,
         command: "SELECT",
@@ -63,7 +64,7 @@ describe("MovieRepository tests", () => {
 
       const result = await movieRepository.fetchMovies();
 
-      expect(mockQuery).toHaveBeenCalledWith("SELECT * FROM movies");
+      expect(mockQuery).toHaveBeenCalledWith(queries.fetchAllMovies);
       expect(result).toEqual(expectedResult);
     });
 
@@ -79,36 +80,42 @@ describe("MovieRepository tests", () => {
         expect(error).toEqual(mockQueryError);
       }
 
-      expect(mockQuery).toHaveBeenCalledWith("SELECT * FROM movies");
+      expect(mockQuery).toHaveBeenCalledWith(queries.fetchAllMovies);
     });
   });
 
   describe("addNewMovie", () => {
     it("should add new movie to database", async () => {
-      const expectedRequest: Movie = {
+      const expectedRequest: OMDbMovie = {
         Poster: "www.poster1.com",
         Title: "The Godfather",
         Type: "Thriller",
         Year: "1972",
         imdbID: "1-abc",
+        upvotes: 3,
       };
       const mockQuery = jest.spyOn(db, "query").mockResolvedValue(undefined);
 
       await movieRepository.addNewMovie(expectedRequest);
 
-      expect(mockQuery).toHaveBeenCalledWith(
-        "INSERT INTO movies (id) VALUES ($1) RETURNING *",
-        ["1-abc"]
-      );
+      expect(mockQuery).toHaveBeenCalledWith(queries.addNewMovie, [
+        "1-abc",
+        "The Godfather",
+        "1972",
+        "Thriller",
+        "www.poster1.com",
+        3,
+      ]);
     });
 
     it("should throw an error if add new movie to database fails", async () => {
-      const expectedRequest: Movie = {
+      const expectedRequest: OMDbMovie = {
         Poster: "www.poster1.com",
         Title: "The Godfather",
         Type: "Thriller",
         Year: "1972",
         imdbID: "1-abc",
+        upvotes: 3,
       };
       const mockQueryError = new Error("Failed to add entry to db");
       const mockQuery = jest
@@ -120,10 +127,14 @@ describe("MovieRepository tests", () => {
       } catch (error) {
         expect(error).toEqual(mockQueryError);
       }
-      expect(mockQuery).toHaveBeenCalledWith(
-        "INSERT INTO movies (id) VALUES ($1) RETURNING *",
-        ["1-abc"]
-      );
+      expect(mockQuery).toHaveBeenCalledWith(queries.addNewMovie, [
+        "1-abc",
+        "The Godfather",
+        "1972",
+        "Thriller",
+        "www.poster1.com",
+        3,
+      ]);
     });
   });
 
@@ -133,10 +144,7 @@ describe("MovieRepository tests", () => {
 
       await movieRepository.upvoteMovie("1-abc", 2);
 
-      expect(mockQuery).toHaveBeenCalledWith(
-        "UPDATE movies SET upvotes = $1 WHERE id = $2 RETURNING *",
-        ["1-abc", 2]
-      );
+      expect(mockQuery).toHaveBeenCalledWith(queries.upvoteMovie, [2, "1-abc"]);
     });
 
     it("should throw an error if upvote existing movie in database fails", async () => {
@@ -151,10 +159,7 @@ describe("MovieRepository tests", () => {
         expect(error).toEqual(mockQueryError);
       }
 
-      expect(mockQuery).toHaveBeenCalledWith(
-        "UPDATE movies SET upvotes = $1 WHERE id = $2 RETURNING *",
-        ["1-abc", 2]
-      );
+      expect(mockQuery).toHaveBeenCalledWith(queries.upvoteMovie, [2, "1-abc"]);
     });
   });
 });

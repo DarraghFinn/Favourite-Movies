@@ -1,24 +1,24 @@
-import { Movie } from "@scribbr-assessment-full-stack/common/src";
+import {
+  OMDbMovie,
+  SearchResultsListProps,
+} from "@scribbr-assessment-full-stack/common/src";
 import React from "react";
 import { MovieItem } from "../../movieItem/MovieItem";
 
-export const SearchResultsList = ({ searchedResults, handleClick }) => {
-  const { Search, error } = searchedResults || {};
+export const SearchResultsList = (props: SearchResultsListProps) => {
+  const { searchedResults, handleClick } = props;
 
   return (
     <div className="searchResultsList" data-testid="scribbr-result-list">
-      {Search?.length > 0 ? (
-        Search.map((movie: Movie) => (
-          <MovieItem
-            key={movie.imdbID}
-            movie={movie}
-            count={null}
-            handleClick={handleClick}
-          />
-        ))
-      ) : (
-        <div>{error}</div>
-      )}
+      {searchedResults.Search.map((movie: OMDbMovie, index: number) => (
+        <MovieItem
+          key={movie.imdbID}
+          movie={movie}
+          count={null}
+          handleClick={handleClick}
+          tabIndex={index + 1}
+        />
+      ))}
     </div>
   );
 };

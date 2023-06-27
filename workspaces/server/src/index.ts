@@ -23,8 +23,18 @@ app.get("*", (req, res) => {
   res.sendFile(join(__dirname, "../../client/public", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`${APP_TITLE}'s server listening at http://localhost:${PORT}`);
-});
+const database = new Database();
+database
+  .createTable()
+  .then(() => {
+    app.listen(PORT, () => {
+      const message = `${APP_TITLE}'s server listening at http://localhost:${PORT}`;
+      console.log(message);
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+    throw error;
+  });
 
 export default app;

@@ -54,6 +54,15 @@ We have provided a simple full-stack project that you can use as a boilerplate. 
 
 The client and server code are located in the `workspaces/client` and `workspaces/server` folders, respectively.
 
+Setting up database:
+
+1. PostgreSQL installed: Ensure that you have PostgreSQL installed on your system. You can download it from the official PostgreSQL website and follow the installation instructions for your operating system.
+2. Access to PostgreSQL: Make sure you have access to a PostgreSQL server. This can be a local installation on your machine or a remote server that you can connect to.
+3. Database: You should have a database created in PostgreSQL where you want the table created. When you start the project, the movies table will be created if it does not exist.
+
+Environment variables:
+Create the .env in your server root directory where the .env.example is located. Copy the values from the .env.example file into your newly created .env file.
+
 To get started, run the following commands:
 
 ```sh

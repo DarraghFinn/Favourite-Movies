@@ -10,21 +10,22 @@
     "build": "ts-node ./scripts/build.ts",
     "dev": "yarn concurrently 'yarn:dev:*'",
     "dev:build": "ts-node ./scripts/build.ts dev",
-    "dev:start": "nodemon --watch dist --exec ts-node ./dist/index.js -q",
+    "dev:start": "nodemon -r dotenv/config --watch dist --exec ts-node ./dist/index.js -q",
     "test": "jest"
   },
   "dependencies": {
     "@scribbr-assessment-full-stack/common": "*",
     "cors": "2.8.5",
-    "express": "4.18.2",
-    "pg": "^8.11.0",
-    "supertest": "^6.3.3"
+    "dotenv": "^16.3.1",
+    "express": "4.18.2"
   },
   "devDependencies": {
     "@types/cors": "2.8.13",
     "@types/express": "4.17.17",
     "@types/pg": "^8.10.2",
     "@types/supertest": "^2.0.12",
-    "nodemon": "2.0.22"
+    "nodemon": "2.0.22",
+    "pg": "^8.11.1",
+    "supertest": "^6.3.3"
   }
 }
